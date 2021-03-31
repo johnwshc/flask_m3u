@@ -1,0 +1,120 @@
+
+{% extends "base.html" %}
+
+{% block app_content %}
+
+     <style>
+
+        .bdy
+        {
+          background-color: lightblue;
+        }
+        .val
+        {
+            color: blue;
+            font-style: italic;
+            font-size: 24px;
+        }
+        hr
+        {
+            border: 1px;
+            height: 2px;
+            /* Set the hr color */
+            color: #111; /* old IE */
+            background-color: #222; /* Modern Browsers */
+        }
+        table, th, td {
+            border: 2px solid black;
+        }
+        th, td {
+            text-align: center;
+            padding: 15px;
+            text-align: left;
+        }
+        div.a {
+
+          font-size: large;color: #0000cc;font-weight: bold;text-align: center;
+
+
+        }
+    </style>
+
+
+
+
+{#<head>#}
+{#    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">#}
+{#    <style type="text/css">body{background:#000040;font-family:arial,helvetica;font-size:9pt;font-weight:normal;}.name{margin-top:-1em;margin-left:15px;font-size:40pt;color:#004080;text-align:left;font-weight:900;}.name-small{margin-top:-3em;margin-left:140px;font-size:22pt;color:#E1E1E1;text-align:left;}table{font-size:9pt;color:#004080;text-align:left;}hr{border:0;background-color:#FFBF00;height:1px;}ol{color:#FFFFFF;font-size:11pt;}table{margin-left:15px;color:#409FFF;}.val{color:#FFBF00;}.header{color:#FFBF00;font-size:14pt;}</style>#}
+{#    <title>Playlist</title>#}
+{#</head>#}
+{#<body>#}
+
+<div align="center" class="bdy">
+<h1> {{ pls.playlist_name }} Playlist  </h1>
+    <div   style="color: black;font-size: large">
+
+        <b class="val">{{ pls.get_pl_length() }}</b>
+
+
+                tracks in playlist, average track length:
+
+                <b class="val">{{ pls.get_mean_duration() }} </b>
+
+                <br/>
+                Playlist length:
+
+                     <b class="val">{{ pls.get_pl_duration_t()[0] }} </b>
+
+                hours <b class="val">{{pls.get_pl_duration_t()[1] }}</b>
+                minutes <b class="val">{{pls.get_pl_duration_t()[2] }}</b>
+                seconds
+                <br/>
+        <hr/>
+
+
+
+    </div>
+    <div class="a">
+
+
+            <a href="{{ url_for('add_tracks_pl',pid=pls.id)}}"> Add Tracks </a>
+
+
+    </div>
+
+</div>
+<table width="80%">
+        <tr>
+        <th>
+            <img src="{{ avatars.gravatar(pls.get_pl_avatar_hash(),size=100) }}">
+        </th>
+        <th>
+            ID
+        </th>
+
+        <th>
+            Artist-Title
+        </th>
+
+        <th>
+            Duration
+        </th>
+
+        <th> Remove Track </th>
+
+        </tr>
+
+        {% for trk  in pls.tracks %}
+
+        {% include '_track.html' %}
+
+        {% endfor %}
+
+
+</table>
+
+
+
+{% endblock %}
+
+

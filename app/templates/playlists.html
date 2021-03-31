@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+     <style>
+
+        .bdy
+        {
+          background-color: lightblue;
+        }
+        .val
+        {
+            color: blue;
+            font-style: italic;
+            font-size: 24px;
+        }
+        hr
+        {
+            border: 1px;
+            height: 2px;
+            /* Set the hr color */
+            color: #111; /* old IE */
+            background-color: #222; /* Modern Browsers */
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            text-align: center;
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+    <div align="center" class="bdy">
+        <h1> Enlighten Radio  Playlists  </h1>
+        <div   style="color: black;font-size: large">
+
+            <b class="val"> {{ num_pl }}</b> Playlists
+
+            <br/>
+            <hr/>
+
+        </div>
+    </div>
+
+    <table width="80%">
+
+        <thead>
+        <tr><th align="center">Playlists</th> </tr>
+        <tr>
+
+            <th>
+{#                <img src="{{ avatars.gravatar(pls.get_pl_avatar_hash(),size=100) }}">#}
+                Avatar
+            </th>
+            <th>ID</th>  <th>Playlist Name</th> <th>Playlist Length </th> <th>Number of tracks </th>
+
+
+        </tr>
+        </thead>
+
+        {% for pl  in plss %}
+
+        {% include '_playlist.html' %}
+
+        {% endfor %}
+
+
+</table>
+
+
+{% endblock %}

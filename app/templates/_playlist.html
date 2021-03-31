@@ -1,0 +1,8 @@
+    <td>
+       <img src="{{ avatars.gravatar(pl.get_pl_avatar_hash(),size=60) }}">
+    </td>
+    <td> {{  pl.id }} </td>
+    <td> <a href="{{ url_for('m3u_playlist', id=pl.id) }}"> {{ pl.playlist_name }} </a> </td>
+    <td> {{ pl.get_duration_str() }} </td>
+    <td> {{ pl.get_pl_length() }} </td>
+

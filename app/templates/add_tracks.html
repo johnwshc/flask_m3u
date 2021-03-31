@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+     <style>
+
+        .bdy
+        {
+          background-color: lightblue;
+        }
+        .val
+        {
+            color: blue;
+            font-style: italic;
+            font-size: 24px;
+        }
+        hr
+        {
+            border: 1px;
+            height: 2px;
+            /* Set the hr color */
+            color: #111; /* old IE */
+            background-color: #222; /* Modern Browsers */
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            text-align: center;
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+    <h1 align="center"> Add Selected Tracks to {{ pls.playlist_name }}</h1>
+
+
+        <form method="POST" action="{{ url_for('add_tracks_pl',pid=pls.id)}}">
+            <input type="hidden" id="custId" name="custId" value="3487">
+         <table id="add_trks-1">
+            <thead>
+            <tr>
+                <th>ID</th> <th>Artist-Title </th> <th>Duration</th> <th>Select</th> <th>Label</th>
+            </tr>
+
+            </thead>
+            {% for trk in trks.items %}
+                {% include '_add_track.html' %}
+            {% endfor %}
+          </table>
+
+        <div> <input type="submit"></div>
+    </form>
+
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Prev posts
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    More posts <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+{% endblock %}
+

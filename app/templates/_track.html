@@ -1,0 +1,16 @@
+
+
+     <tr>
+         <td>
+            <img src="{{ avatars.gravatar(trk.get_tr_avatar_hash(),size=60) }}">
+         </td>
+         <td> {{  trk.id }} </td>
+         <td>
+            <a href="{{  url_for('track',id=trk.id) }}"> {{  trk.artist_title }} </a>
+         </td>
+         <td> {{ trk.get_duration_str() }} </td>
+         <td> <a href="{{ url_for('pl_remove_track', pl_id=pls.id,  trk_id=trk.id)}}"> Remove Track </a>  </td>
+     </tr>
+
+
+

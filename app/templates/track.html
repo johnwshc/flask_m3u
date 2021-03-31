@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+    <style>
+
+        .bdy
+        {
+          background-color: lightblue;
+        }
+        .val
+        {
+            color: blue;
+            font-style: italic;
+            font-size: 24px;
+        }
+        hr
+        {
+            border: 1px;
+            height: 2px;
+            /* Set the hr color */
+            color: #111; /* old IE */
+            background-color: #222; /* Modern Browsers */
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            text-align: center;
+            padding: 15px;
+            text-align: left;
+        }
+
+        span.a {
+          font-size: 15px;
+        }
+
+        span.b {
+          font-size: large;color: #0000cc;font-weight: bold;text-align: center;
+
+        }
+
+        span.c {
+          font-size: 150%;
+        }
+
+        #attrs {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 80%;
+        }
+
+        #attrs td, #customers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #attrs tr:nth-child(even){background-color: #f2f2f2;}
+
+        #attrs tr:hover {background-color: #ddd;}
+
+        #attrs th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #003366;
+          color: white;
+        }
+</style>
+
+
+<div align="center" class="bdy">
+    <h1> {{ trk.artist_title }} Audio Track  </h1>
+</div>
+{#id = db.Column(db.Integer, primary_key=True)#}
+{#    album = db.Column(db.String(120))#}
+{#    albumartist = db.Column(db.String(80))#}
+{#    artist = db.Column(db.String(80))#}
+{#    bitrate = db.Column(db.Integer)#}
+{#    comment = db.Column(db.String(140))#}
+{#    composer = db.Column(db.String(80))#}
+{#    disc = db.Column(db.Integer)#}
+{#    disc_total = db.Column(db.Integer)#}
+{#    duration = db.Column(db.Integer)#}
+{#    filesize = db.Column(db.Integer)#}
+{#    genre = db.Column(db.String(20))#}
+{#    samplerate = db.Column(db.Integer)#}
+{#    title = db.Column(db.String(80))#}
+{#    tracknum = db.Column(db.String(3))#}
+{#    track_total = db.Column(db.String(3))#}
+{#    year = db.Column(db.String(8))#}
+{#    url =  db.Column(db.String(240))#}
+{#    artist_title = db.Column(db.String(80), unique=True, index=True)#}
+{#    filename = db.Column(db.String(80), unique=True, index=True)#}
+
+
+
+
+    <table id=attrs width="80%">
+        <tr>
+            <th>
+                Track ID3 Tag
+            </th>
+            <th>
+                Value
+            </th>
+
+        </tr>
+
+            {% for attr  in trk.get_attrs()  %}
+
+            {% include '_track_attrs.html' %}
+
+            {% endfor %}
+
+
+    </table>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray"/>
+    <div style="text-align: center;">
+    <span class="b"> <a href="{{ url_for('edit_track', id=trk.id) }}"> Edit Track </a></span>
+    </div>
+
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray"/>
+
+
+{% endblock %}

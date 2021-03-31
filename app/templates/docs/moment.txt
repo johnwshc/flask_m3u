@@ -1,0 +1,60 @@
+Using Moment.js
+Moment.js makes a moment class available to the browser.
+The first step to render a timestamp is to create an object of this class,
+passing the desired timestamp in ISO 8601 format. Here is an example:
+
+t = moment('2017-09-28T21:45:23Z')
+If you are not familiar with the ISO 8601 standard format for dates and times,
+the format is as follows:
+
+{{ year }}-{{ month }}-{{ day }}T{{ hour }}:{{ minute }}:{{ second }}{{ timezone }}.
+
+I already decided that I was only going to work with UTC timezones,
+ so the last part is always going to be Z, which represents UTC in the ISO 8601 standard.
+
+The moment object provides several methods for different rendering options.
+Below are some of the most common options:
+
+moment('2017-09-28T21:45:23Z').format('L')
+"09/28/2017"
+moment('2017-09-28T21:45:23Z').format('LL')
+"September 28, 2017"
+moment('2017-09-28T21:45:23Z').format('LLL')
+"September 28, 2017 2:45 PM"
+moment('2017-09-28T21:45:23Z').format('LLLL')
+"Thursday, September 28, 2017 2:45 PM"
+moment('2017-09-28T21:45:23Z').format('dddd')
+"Thursday"
+moment('2017-09-28T21:45:23Z').fromNow()
+"7 hours ago"
+moment('2017-09-28T21:45:23Z').calendar()
+"Today at 2:45 PM"
+
+This example creates a moment object initialized to
+September 28th 2017 at 9:45pm UTC.
+
+You can see that all the options I tried above are rendered in UTC-7,
+which is the timezone configured on my computer.
+You can enter the above commands in your browser's console,
+making sure the page on which you open the console has moment.js included.
+
+ You can do it in microblog, as long as you made the changes above to include moment.js,
+ or also on https://momentjs.com/.
+
+Note how the different methods create different representations.
+With format() you control the format of the output with a format string,
+similar to the strftime function from Python.
+
+The fromNow() and calendar() methods are interesting because
+they render the timestamp in relation to the current time,
+so you get output such as "a minute ago" or "in two hours", etc.
+
+If you were working directly in JavaScript,
+the above calls return a string that has the
+rendered timestamp. Then it is up to you to
+insert this text in the proper place on the page,
+which unfortunately requires some JavaScript to work w
+ith the DOM. The Flask-Moment extension greatly
+simplifies the use of moment.js by enabling a
+moment object similar to the JavaScript one in your
+templates.
